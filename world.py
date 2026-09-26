@@ -3,10 +3,7 @@ from logging import warning
 
 from Options import Option, PlandoConnection
 
-try:
-    from rule_builder import RuleWorldMixin, Rule, False_
-except ModuleNotFoundError:
-    from .rule_builder import RuleWorldMixin, Rule, False_
+from rule_builder.rules import Rule, False_
 from .options import (
     DeathsDoorOptions,
     Goal,
@@ -86,7 +83,7 @@ class DeathsDoorWeb(WebWorld):
     ]
 
 
-class DeathsDoorWorld(RuleWorldMixin, World):
+class DeathsDoorWorld(World):
     """Reaping souls of the dead and punching a clock might get monotonous but it's honest work for a Crow.
     The job gets lively when your assigned soul is stolen and you must track down a desperate thief to a realm
     untouched by death - where creatures grow far past their expiry."""
@@ -108,9 +105,6 @@ class DeathsDoorWorld(RuleWorldMixin, World):
     ut_can_gen_without_yaml: ClassVar[bool] = True
     glitches_item_name: ClassVar[str] = E.OOL.value
     found_entrances_datastorage_key = "{player}_{team}_deathsdoor_found_entrances",
-
-    # rule_builder
-    rule_caching_enabled = False
 
     @staticmethod
     def interpret_slot_data(slot_data: dict[str, Any]) -> dict[str, Any]:

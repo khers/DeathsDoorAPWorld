@@ -11,18 +11,8 @@ from .events import (
 )
 from .rules import HasEnoughLifeSeeds, HasPlantedEnoughLifeSeeds
 
-try:
-    from rule_builder import (
-        Rule,
-        True_,
-        OptionFilter,
-    )
-except ModuleNotFoundError:
-    from .rule_builder import (
-        Rule,
-        True_,
-        OptionFilter,
-    )
+from rule_builder.rules import Rule, True_
+from rule_builder.options import OptionFilter
 
 if TYPE_CHECKING:
     from . import DeathsDoorWorld

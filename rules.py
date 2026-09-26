@@ -8,18 +8,8 @@ from .regions import DeathsDoorRegionName as R
 from .options import OffscreenTargetingTricks, GeometryExploits, RollBuffers
 from .vanilla_pools import vanilla_location_lookup
 
-try:
-    from rule_builder import (
-        Rule,
-        True_,
-        OptionFilter,
-    )
-except ModuleNotFoundError:
-    from .rule_builder import (
-        Rule,
-        True_,
-        OptionFilter,
-    )
+from rule_builder.rules import Rule, True_
+from rule_builder.options import OptionFilter
 from .rule_builder_overrides import (
     Has,
     HasAny,

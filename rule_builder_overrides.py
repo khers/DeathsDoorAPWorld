@@ -6,26 +6,15 @@ from .locations import DeathsDoorLocationName as L
 from .events import DeathsDoorEventName as E
 from .regions import DeathsDoorRegionName as R
 
-try:
-    from rule_builder import (
-        OptionFilter,
-        Has as RBHas,
-        HasAll as RBHasAll,
-        HasAny as RBHasAny,
-        HasGroup as RBHasGroup,
-        CanReachLocation as RBCanReachLocation,
-        CanReachRegion as RBCanReachRegion,
-    )
-except ModuleNotFoundError:
-    from .rule_builder import (
-        OptionFilter,
-        Has as RBHas,
-        HasAll as RBHasAll,
-        HasAny as RBHasAny,
-        HasGroup as RBHasGroup,
-        CanReachLocation as RBCanReachLocation,
-        CanReachRegion as RBCanReachRegion,
-    )
+from rule_builder.rules import (
+    Has as RBHas,
+    HasAll as RBHasAll,
+    HasAny as RBHasAny,
+    HasGroup as RBHasGroup,
+    CanReachLocation as RBCanReachLocation,
+    CanReachRegion as RBCanReachRegion,
+)
+from rule_builder.options import OptionFilter
     
 # Override Has, etc. to take DeathsDoorItemName enum instead of string
 @dataclasses.dataclass()
