@@ -91,8 +91,8 @@ class ExtraMagicShards(Range):
 class ExtraVitalityShards(Range):
     """Add extra vitality shards to the item pool, replacing Soul Orb items. Extra vitality shards can allow your health to go over the vanilla maximum of 6. Each extra pip of health requires 4 shards."""
 
-    internal_name = "extra_magic_shards"
-    display_name = "Extra Magic Shards"
+    internal_name = "extra_vitality_shards"
+    display_name = "Extra Vitality Shards"
     range_start = 0
     range_end = 8
     default = 0

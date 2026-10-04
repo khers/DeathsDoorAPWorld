@@ -1,0 +1,34 @@
+name: Build apworld
+
+on:
+  push:
+    tags:
+      - "*"
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: deaths_door
+
+      - name: Check tag matches version
+        working-directory: deaths_door
+        run: |
+          tag="${GITHUB_REF_NAME#v}"
+          json=$(jq -r .world_version archipelago.json)
+          echo "tag=$tag archipelago.json=$json"
+          [ "$tag" = "$json" ]
+
+      - name: Package apworld
+        run: |
+          zip -r deaths_door.apworld deaths_door \
+            -x 'deaths_door/.git/*' 'deaths_door/.github/*' '*__pycache__*' 'deaths_door/.gitignore'
+
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: deaths_door.apworld

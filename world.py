@@ -13,6 +13,7 @@ from .options import (
     EntranceRandomization,
 )
 from .vanilla_pools import vanilla_location_lookup
+from .version import deathsdoor_version
 from .items import (
     item_name_to_id,
     item_table,
@@ -53,8 +54,6 @@ from .json_generator import (
     generate_locations_json,
     generate_scene_transition_json,
 )
-
-deathsdoor_version = "0.3.0"
 
 
 class DeathsDoorItem(Item):
@@ -143,9 +142,9 @@ class DeathsDoorWorld(World):
             I.FIRE,
         ]
         important_item = self.random.choice(early_important_item_candidates)
-        if self.options.early_important_item.option_early:
+        if self.options.early_important_item == self.options.early_important_item.option_early:
             self.multiworld.early_items[self.player][important_item.value] = 1
-        elif self.options.early_important_item.option_local_early:
+        elif self.options.early_important_item == self.options.early_important_item.option_local_early:
             self.multiworld.local_early_items[self.player][important_item.value] = 1
 
         # warn for all the incompatible options
@@ -486,7 +485,6 @@ class DeathsDoorWorld(World):
             completion_rule = completion_rule | Has(E.LIFE_SEED_DOOR)
 
         self.set_completion_rule(completion_rule)
-        self.register_dependencies()
 
         # generate_rule_json()
         # generate_items_json()
